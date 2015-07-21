@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SwiftTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,10 +15,66 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNH-Ks-FCZ" userLabel="Timer">
+                                <rect key="frame" x="190" y="239" width="220" height="121"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="220" id="32c-Qx-a49"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="60"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpU-I5-EJd">
+                                <rect key="frame" x="225" y="470" width="150" height="50"/>
+                                <state key="normal" title="Stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gr2-LM-3zg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fwy-3z-Bow">
+                                <rect key="frame" x="225" y="390" width="150" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="bug-vW-zER"/>
+                                    <constraint firstAttribute="height" constant="50" id="kg6-8h-d1v"/>
+                                </constraints>
+                                <state key="normal" title="Start">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="start:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R9y-1N-N4k"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="DpU-I5-EJd" firstAttribute="top" secondItem="fwy-3z-Bow" secondAttribute="bottom" constant="30" id="0uW-7b-4mF"/>
+                            <constraint firstItem="UNH-Ks-FCZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="219" id="7Nn-hd-FEE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="DpU-I5-EJd" secondAttribute="bottom" constant="80" id="Y3H-Vk-7n2"/>
+                            <constraint firstItem="fwy-3z-Bow" firstAttribute="trailing" secondItem="DpU-I5-EJd" secondAttribute="trailing" id="ZKL-Bp-GE7"/>
+                            <constraint firstItem="UNH-Ks-FCZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZR7-JN-OME"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="UNH-Ks-FCZ" secondAttribute="bottom" constant="240" id="b3U-o1-Qtd"/>
+                            <constraint firstItem="fwy-3z-Bow" firstAttribute="top" secondItem="UNH-Ks-FCZ" secondAttribute="bottom" constant="30" id="cnJ-Wa-9Al"/>
+                            <constraint firstItem="DpU-I5-EJd" firstAttribute="leading" secondItem="fwy-3z-Bow" secondAttribute="leading" id="pnf-Q0-bPe"/>
+                            <constraint firstItem="fwy-3z-Bow" firstAttribute="centerX" secondItem="UNH-Ks-FCZ" secondAttribute="centerX" id="sAI-Tl-K9F"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="J64-dS-lGx" appends="YES" id="Uzj-v6-Mfi"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="timerLabel" destination="UNH-Ks-FCZ" id="1PL-IR-Wx3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="J64-dS-lGx">
+                    <connections>
+                        <action selector="screenSwiped:" destination="BYZ-38-t0r" id="ylH-U3-oaN"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
         </scene>
     </scenes>
