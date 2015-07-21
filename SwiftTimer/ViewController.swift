@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var timerLabel: UILabel!
     var mainTimer = TimerController()
-    var recognizer = UIPanGestureRecognizer()
     var lastRecognizedInterval = CGPoint()
     var kPanIntervalDistance : CGFloat = 30
     var kPanIntervalSeconds = NSTimeInterval(300)
@@ -21,8 +20,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         mainTimer = TimerController(viewLabel: timerLabel)
-        recognizer = UIPanGestureRecognizer(target: self, action: "screenSwiped:")
-        self.view.addGestureRecognizer(recognizer)
         
         mainTimer.setTimeLeft(NSTimeInterval(0))
         mainTimer.view = self.view
@@ -46,7 +43,7 @@ class ViewController: UIViewController {
         // Checks to make sure the timer is invalid and not yet running
         if !mainTimer.timer.valid {
             // Get total distance traveled in current pan
-            var thisInterval = recognizer.translationInView(self.view)
+            var thisInterval = sender.translationInView(self.view)
             
             // If the total distance minus the last distance point is greater than the minimum pan distance, pan the timer values
             if lastRecognizedInterval.y - thisInterval.y > kPanIntervalDistance {
