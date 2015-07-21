@@ -415,6 +415,7 @@
 				9F86A2E51B5EB53800D2A909 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9F86A2E61B5EB53800D2A909 /* Build configuration list for PBXNativeTarget "SwiftTimerTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +424,7 @@
 				9F86A2E81B5EB53800D2A909 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

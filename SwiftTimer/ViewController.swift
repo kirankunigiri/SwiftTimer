@@ -72,6 +72,30 @@ class ViewController: UIViewController {
         }
     }
     
+    func animateChangeText(labelToAnimate: UILabel, color: UIColor) {
+        UIView.transitionWithView(self.view, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+            
+            }, completion: {
+                (finished: Bool) -> () in
+                
+                UIView.transitionWithView(self.view, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                    
+                    labelToAnimate.textColor = color
+                    
+                    }, completion: {
+                        (finished: Bool) -> () in
+                })
+        })
+    }
+    
+    func getRandomColor() -> UIColor {
+        var randomRed: CGFloat = CGFloat(drand48())
+        var randomGreen: CGFloat = CGFloat(drand48())
+        var randomBlue: CGFloat = CGFloat(drand48())
+        return UIColor(red: randomRed, green: randomGreen, blue: randomBlue, alpha: 1)
+    }
+    
+    
     
     
 }
