@@ -35,6 +35,13 @@ class TimerController: NSObject {
     var minutes = 0
     var seconds = 0
     
+    // States
+    var stateSelect = 0
+    var stateCountdown = 1
+    var stateAskBreak = 2
+    var stateBreak = 3
+    var state = 0
+    
     override init() {
         
     }
@@ -46,6 +53,9 @@ class TimerController: NSObject {
         // Set the label and its text to default
         label = viewLabel
         updateLabel()
+        label.text = "Start"
+        
+        state = stateSelect
     }
     
     // MARK: Main Update Function
@@ -61,6 +71,7 @@ class TimerController: NSObject {
         // Runs when the timer is over
         if timeLeft <= 0 {
             self.stop()
+            state = stateAskBreak
         }
         
         //calculate the hours in elapsed time.
@@ -90,12 +101,15 @@ class TimerController: NSObject {
             let aSelector: Selector = "updateTime"
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
             startTime = NSDate.timeIntervalSinceReferenceDate()
+            state = stateCountdown
         }
     }
     
     func stop() {
         timer.invalidate()
         resetTimer()
+        state = stateSelect
+        label.text = "Start"
     }
     
     // MARK: Get Value Functions

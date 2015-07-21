@@ -80,8 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				9F86A2C91B5EB53800D2A909 /* AppDelegate.swift */,
-				9F86A2E91B5EB5BB00D2A909 /* TimerController.swift */,
 				9F86A2CB1B5EB53800D2A909 /* ViewController.swift */,
+				9F86A2E91B5EB5BB00D2A909 /* TimerController.swift */,
 				9F86A2CD1B5EB53800D2A909 /* Main.storyboard */,
 				9F86A2D01B5EB53800D2A909 /* Images.xcassets */,
 				9F86A2D21B5EB53800D2A909 /* LaunchScreen.xib */,

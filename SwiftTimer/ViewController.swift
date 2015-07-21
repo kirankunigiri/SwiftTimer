@@ -14,14 +14,13 @@ class ViewController: UIViewController {
     var mainTimer = TimerController()
     var lastRecognizedInterval = CGPoint()
     var kPanIntervalDistance : CGFloat = 30
-    var kPanIntervalSeconds = NSTimeInterval(300)
+    var kPanIntervalSeconds = NSTimeInterval(1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         mainTimer = TimerController(viewLabel: timerLabel)
         
-        mainTimer.setTimeLeft(NSTimeInterval(0))
         mainTimer.view = self.view
     }
     
