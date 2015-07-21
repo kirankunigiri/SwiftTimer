@@ -36,11 +36,15 @@ class TimerController: NSObject {
     var seconds = 0
     
     // States
-    var stateSelect = 0
+    var stateSelectCountdown = 0
     var stateCountdown = 1
-    var stateAskBreak = 2
+    var stateSelectBreak = 2
     var stateBreak = 3
     var state = 0
+    
+    // Constant text strings
+    var kWorkText = "Start working!"
+    var kBreakText = "Want to take a break?"
     
     override init() {
         
@@ -55,7 +59,7 @@ class TimerController: NSObject {
         updateLabel()
         label.text = "Start"
         
-        state = stateSelect
+        state = stateSelectCountdown
     }
     
     // MARK: Main Update Function
@@ -69,47 +73,60 @@ class TimerController: NSObject {
         var timeLeft = totalTime - elapsedTime
         
         // Runs when the timer is over
-        if timeLeft <= 0 {
+        if timeLeft < 1 {
             self.stop()
-            state = stateAskBreak
+        } else {
+            
+            //calculate the hours in elapsed time.
+            hours = Int(timeLeft / 3600.0)
+            timeLeft -= (NSTimeInterval(hours) * 3600)
+            
+            //calculate the minutes in elapsed time.
+            minutes = Int(timeLeft / 60.0)
+            timeLeft -= (NSTimeInterval(minutes) * 60)
+            
+            //calculate the seconds in elapsed time.
+            seconds = Int(timeLeft)
+            timeLeft -= NSTimeInterval(seconds)
+            
+            //add the leading zero for minutes, seconds and millseconds and store them as string constants
+            strHours = String(format: "%01d", hours)
+            strMinutes = String(format: "%02d", minutes)
+            strSeconds = String(format: "%02d", seconds)
+            
+            //concatenate minuets, seconds and milliseconds as assign it to the UILabel
+            updateLabel()
         }
-        
-        //calculate the hours in elapsed time.
-        hours = Int(timeLeft / 3600.0)
-        timeLeft -= (NSTimeInterval(hours) * 3600)
-        
-        //calculate the minutes in elapsed time.
-        minutes = Int(timeLeft / 60.0)
-        timeLeft -= (NSTimeInterval(minutes) * 60)
-        
-        //calculate the seconds in elapsed time.
-        seconds = Int(timeLeft)
-        timeLeft -= NSTimeInterval(seconds)
-        
-        //add the leading zero for minutes, seconds and millseconds and store them as string constants
-        strHours = String(format: "%01d", hours)
-        strMinutes = String(format: "%02d", minutes)
-        strSeconds = String(format: "%02d", seconds)
-        
-        //concatenate minuets, seconds and milliseconds as assign it to the UILabel
-        updateLabel()
     }
     
     // MARK: Start/Stop Functions
     func start() {
-        if !timer.valid {
+        // Check to make sure the timer has not started yet and the time is greater than 0
+        if !timer.valid && totalTime != 0{
+            // Create a timer and start it
             let aSelector: Selector = "updateTime"
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
             startTime = NSDate.timeIntervalSinceReferenceDate()
-            state = stateCountdown
+            
+            // Update the state to timing modes
+            if state == stateSelectCountdown {
+                state = stateCountdown
+            } else if state == stateSelectBreak {
+                state = stateBreak
+            }
         }
     }
     
     func stop() {
-        timer.invalidate()
-        resetTimer()
-        state = stateSelect
-        label.text = "Start"
+        // Only stop it if it is currently valid (running)
+        if timer.valid {
+            // Invalidate the timer and reset it to 0
+            timer.invalidate()
+            resetTimer()
+            // Update the state to work select state
+            label.text = kWorkText
+            state = stateSelectCountdown
+        }
     }
     
     // MARK: Get Value Functions
