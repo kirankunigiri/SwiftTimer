@@ -15,6 +15,7 @@ class AnimationController: NSObject {
     var timerLabel = UILabel()
     var breakButton = UIButton()
     
+    // Mkes the break button disappear
     class func breakButtonDisappear(breakButton: UIButton) {
         UIView.animateWithDuration(0.4, animations: {
             breakButton.alpha = 0
@@ -24,6 +25,7 @@ class AnimationController: NSObject {
 
     }
     
+    // Re-appears the break button
     class func breakButtonAppear(breakButton: UIButton) {
         UIView.animateWithDuration(0.4, animations: {
             breakButton.hidden = false

@@ -115,6 +115,7 @@ class TimerController: NSObject {
         }
     }
     
+    // Main function used to stop the timer, used in the timerfinished() function
     func stop() {
         // Only stop it if it is currently valid (running)
         if timer.valid {
@@ -177,11 +178,13 @@ class TimerController: NSObject {
         updateLabel()
     }
     
+    // Changes the total time left
     func setTimeLeft(timeLeft: NSTimeInterval) {
         totalTime = timeLeft
         resetDisplay()
     }
     
+    // Resets the timer to the default 0, used by the stop() function
     func resetTimer() {
         totalTime = NSTimeInterval(0)
         resetDisplay()
@@ -200,6 +203,8 @@ class TimerController: NSObject {
     }
     
     // MARK: Private Update Functions
+    
+    // Updates the label with the newest values
     private func updateLabel() {
         if hours > 0 {
             label.text = "\(strHours):\(strMinutes):\(strSeconds)"
@@ -208,6 +213,9 @@ class TimerController: NSObject {
         }
     }
     
+    // This function is called every time the timer finshes
+    // It switches the states and hides button
+    // Later it will be used to add points and update the UI
     private func timerFinished() {
         if state == stateCountdown {
             AnimationController.breakButtonAppear(breakButton)

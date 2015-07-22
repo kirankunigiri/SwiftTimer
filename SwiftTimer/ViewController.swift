@@ -114,6 +114,7 @@ class ViewController: UIViewController {
         })
     }
     
+    // Creates a random UIColor
     func getRandomColor() -> UIColor {
         var randomRed: CGFloat = CGFloat(drand48())
         var randomGreen: CGFloat = CGFloat(drand48())
