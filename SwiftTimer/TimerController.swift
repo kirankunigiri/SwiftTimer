@@ -20,6 +20,8 @@ class TimerController: NSObject {
     
     // The UILabel we will have to update, along with an optional view if needed
     var label = UILabel()
+    var breakButton = UIButton()
+    var modeLabel = UILabel()
     var view = UIView()
     
     // Properties of the label string
@@ -72,28 +74,23 @@ class TimerController: NSObject {
         //Set the elapsed time to the amount of time left in the timer
         var timeLeft = totalTime - elapsedTime
         
-        // Runs when the timer is over
+        // Runs when the timer is over, otherwise continue to update the timer
         if timeLeft < 1 {
-            self.stop()
+            timerFinished()
         } else {
-            
             //calculate the hours in elapsed time.
             hours = Int(timeLeft / 3600.0)
             timeLeft -= (NSTimeInterval(hours) * 3600)
-            
             //calculate the minutes in elapsed time.
             minutes = Int(timeLeft / 60.0)
             timeLeft -= (NSTimeInterval(minutes) * 60)
-            
             //calculate the seconds in elapsed time.
             seconds = Int(timeLeft)
             timeLeft -= NSTimeInterval(seconds)
-            
             //add the leading zero for minutes, seconds and millseconds and store them as string constants
             strHours = String(format: "%01d", hours)
             strMinutes = String(format: "%02d", minutes)
             strSeconds = String(format: "%02d", seconds)
-            
             //concatenate minuets, seconds and milliseconds as assign it to the UILabel
             updateLabel()
         }
@@ -125,7 +122,6 @@ class TimerController: NSObject {
             resetTimer()
             // Update the state to work select state
             label.text = kWorkText
-            state = stateSelectCountdown
         }
     }
     
@@ -209,6 +205,18 @@ class TimerController: NSObject {
         } else {
             label.text = "\(strMinutes):\(strSeconds)"
         }
+    }
+    
+    private func timerFinished() {
+        if state == stateCountdown {
+            AnimationController.breakButtonAppear(breakButton)
+        } else if state == stateBreak {
+            AnimationController.breakButtonDisappear(breakButton)
+            breakButton.selected = false
+            state = stateSelectCountdown
+        }
+        
+        self.stop()
     }
     
 }

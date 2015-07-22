@@ -11,6 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var breakButton: UIButton!
+    @IBOutlet weak var modeLabel: UILabel!
     var mainTimer = TimerController()
     var lastRecognizedInterval = CGPoint()
     var kPanIntervalDistance : CGFloat = 30
@@ -22,6 +24,11 @@ class ViewController: UIViewController {
         mainTimer = TimerController(viewLabel: timerLabel)
         
         mainTimer.view = self.view
+        mainTimer.breakButton = breakButton
+        mainTimer.modeLabel = modeLabel
+        
+        breakButton.hidden = true
+        breakButton.alpha = 0
     }
     
     override func didReceiveMemoryWarning() {
@@ -36,6 +43,21 @@ class ViewController: UIViewController {
     @IBAction func stop(sender: UIButton) {
         mainTimer.stop()
     }
+    
+    @IBAction func breakButtonPressed(sender: UIButton) {
+        
+        // If the sender is being turned on, set to break mode
+        if !sender.selected {
+            mainTimer.state = mainTimer.stateSelectBreak
+            modeLabel.text = "Break mode"
+            sender.selected = true
+        } else {
+            mainTimer.state = mainTimer.stateSelectCountdown
+            modeLabel.text = "Work mode"
+            sender.selected = false
+        }
+    }
+
     
     // Allows user to swipe the screen to set the timer
     @IBAction func screenSwiped(sender: UIPanGestureRecognizer) {
@@ -68,6 +90,14 @@ class ViewController: UIViewController {
         }
     }
     
+    
+    
+    
+    
+    
+    
+    
+    // Animation functions
     func animateChangeText(labelToAnimate: UILabel, color: UIColor) {
         UIView.transitionWithView(self.view, duration: 0.5, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             
