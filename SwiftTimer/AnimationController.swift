@@ -16,20 +16,16 @@ class AnimationController: NSObject {
     var breakButton = UIButton()
     
     class func breakButtonDisappear(breakButton: UIButton) {
-        UIView.animateWithDuration(1.0, animations: {
+        UIView.animateWithDuration(0.4, animations: {
             breakButton.alpha = 0
             }, completion: { _ in
             breakButton.hidden = true
         })
-        
-        UIView.animateWithDuration(1.0, animations: {
-            breakButton.hidden = true
-            breakButton.alpha = 0
-        })
+
     }
     
     class func breakButtonAppear(breakButton: UIButton) {
-        UIView.animateWithDuration(1.0, animations: {
+        UIView.animateWithDuration(0.4, animations: {
             breakButton.hidden = false
             breakButton.alpha = 1
         })

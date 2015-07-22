@@ -99,7 +99,7 @@ class TimerController: NSObject {
     // MARK: Start/Stop Functions
     func start() {
         // Check to make sure the timer has not started yet and the time is greater than 0
-        if !timer.valid && totalTime != 0{
+        if !timer.valid && totalTime != 0 {
             // Create a timer and start it
             let aSelector: Selector = "updateTime"
             timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: aSelector, userInfo: nil, repeats: true)
@@ -111,6 +111,7 @@ class TimerController: NSObject {
             } else if state == stateSelectBreak {
                 state = stateBreak
             }
+            AnimationController.breakButtonDisappear(breakButton)
         }
     }
     
@@ -214,6 +215,7 @@ class TimerController: NSObject {
             AnimationController.breakButtonDisappear(breakButton)
             breakButton.selected = false
             state = stateSelectCountdown
+            modeLabel.text = "Work Mode"
         }
         
         self.stop()
