@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
     
@@ -17,6 +18,9 @@ class ViewController: UIViewController {
     var lastRecognizedInterval = CGPoint()
     var kPanIntervalDistance : CGFloat = 30
     var kPanIntervalSeconds = NSTimeInterval(1)
+    
+    // Core Data Stuff
+    @IBOutlet weak var pointsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -14,6 +14,8 @@
 		9F86A2D41B5EB53800D2A909 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F86A2D21B5EB53800D2A909 /* LaunchScreen.xib */; };
 		9F86A2E01B5EB53800D2A909 /* SwiftTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F86A2DF1B5EB53800D2A909 /* SwiftTimerTests.swift */; };
 		9F86A2EA1B5EB5BB00D2A909 /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F86A2E91B5EB5BB00D2A909 /* TimerController.swift */; };
+		9FD227481B615BAA00AFF405 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD227471B615BAA00AFF405 /* CoreData.framework */; };
+		9FD2274B1B615BF800AFF405 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FD227491B615BF800AFF405 /* Data.xcdatamodeld */; };
 		9FF0E3461B5F04A400BD65CD /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF0E3451B5F04A400BD65CD /* AnimationController.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		9F86A2DE1B5EB53800D2A909 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F86A2DF1B5EB53800D2A909 /* SwiftTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTimerTests.swift; sourceTree = "<group>"; };
 		9F86A2E91B5EB5BB00D2A909 /* TimerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
+		9FD227471B615BAA00AFF405 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9FD2274A1B615BF800AFF405 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
 		9FF0E3451B5F04A400BD65CD /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FD227481B615BAA00AFF405 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +68,7 @@
 		9F86A2BB1B5EB53800D2A909 = {
 			isa = PBXGroup;
 			children = (
+				9FD227471B615BAA00AFF405 /* CoreData.framework */,
 				9F86A2C61B5EB53800D2A909 /* SwiftTimer */,
 				9F86A2DC1B5EB53800D2A909 /* SwiftTimerTests */,
 				9F86A2C51B5EB53800D2A909 /* Products */,
@@ -89,6 +95,7 @@
 				9F86A2CD1B5EB53800D2A909 /* Main.storyboard */,
 				9F86A2D21B5EB53800D2A909 /* LaunchScreen.xib */,
 				9F86A2C71B5EB53800D2A909 /* Supporting Files */,
+				9FD227491B615BF800AFF405 /* Data.xcdatamodeld */,
 			);
 			path = SwiftTimer;
 			sourceTree = "<group>";
@@ -220,6 +227,7 @@
 			files = (
 				9FF0E3461B5F04A400BD65CD /* AnimationController.swift in Sources */,
 				9F86A2CC1B5EB53800D2A909 /* ViewController.swift in Sources */,
+				9FD2274B1B615BF800AFF405 /* Data.xcdatamodeld in Sources */,
 				9F86A2CA1B5EB53800D2A909 /* AppDelegate.swift in Sources */,
 				9F86A2EA1B5EB5BB00D2A909 /* TimerController.swift in Sources */,
 			);
@@ -431,6 +439,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9FD227491B615BF800AFF405 /* Data.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9FD2274A1B615BF800AFF405 /* Data.xcdatamodel */,
+			);
+			currentVersion = 9FD2274A1B615BF800AFF405 /* Data.xcdatamodel */;
+			path = Data.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9F86A2BC1B5EB53800D2A909 /* Project object */;
 }
