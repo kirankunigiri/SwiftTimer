@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class TimerController: NSObject {
     
@@ -15,11 +16,13 @@ class TimerController: NSObject {
     
     // Will run every 0.1 seconds
     var timer = NSTimer()
+    let realm = Realm()
     // The time when the timer started
     var startTime = NSTimeInterval()
     
-    // The UILabel we will have to update, along with an optional view if needed
+    // Required objects to set from ViewController
     var label = UILabel()
+    var pointsLabel = UILabel()
     var breakButton = UIButton()
     var modeLabel = UILabel()
     var view = UIView()
@@ -43,6 +46,7 @@ class TimerController: NSObject {
     var stateSelectBreak = 2
     var stateBreak = 3
     var state = 0
+    
     
     // Constant text strings
     var kWorkText = "Start working!"
@@ -225,6 +229,14 @@ class TimerController: NSObject {
             state = stateSelectCountdown
             modeLabel.text = "Work Mode"
         }
+        
+        let users = Realm().objects(User)
+        var tempUser = users.first!
+        
+        realm.write {
+            tempUser.number += Int(self.totalTime)
+        }
+        pointsLabel.text = "\(tempUser.number)"
         
         self.stop()
     }

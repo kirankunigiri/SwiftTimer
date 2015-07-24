@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F5D89881B618F3B00836311 /* GestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5D89871B618F3B00836311 /* GestureController.swift */; };
 		9F86A2CA1B5EB53800D2A909 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F86A2C91B5EB53800D2A909 /* AppDelegate.swift */; };
 		9F86A2CC1B5EB53800D2A909 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F86A2CB1B5EB53800D2A909 /* ViewController.swift */; };
 		9F86A2CF1B5EB53800D2A909 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F86A2CD1B5EB53800D2A909 /* Main.storyboard */; };
@@ -14,8 +15,13 @@
 		9F86A2D41B5EB53800D2A909 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F86A2D21B5EB53800D2A909 /* LaunchScreen.xib */; };
 		9F86A2E01B5EB53800D2A909 /* SwiftTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F86A2DF1B5EB53800D2A909 /* SwiftTimerTests.swift */; };
 		9F86A2EA1B5EB5BB00D2A909 /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F86A2E91B5EB5BB00D2A909 /* TimerController.swift */; };
-		9FD227481B615BAA00AFF405 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD227471B615BAA00AFF405 /* CoreData.framework */; };
-		9FD2274B1B615BF800AFF405 /* Data.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9FD227491B615BF800AFF405 /* Data.xcdatamodeld */; };
+		9FA5505C1B61A84C00025151 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA5505A1B61A84C00025151 /* Realm.framework */; };
+		9FA5505D1B61A84C00025151 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA5505A1B61A84C00025151 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9FA5505E1B61A84C00025151 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA5505B1B61A84C00025151 /* RealmSwift.framework */; };
+		9FA5505F1B61A84C00025151 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9FA5505B1B61A84C00025151 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9FA550631B61AAA300025151 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA550621B61AAA300025151 /* User.swift */; };
+		9FD2F95E1B629EBE00C4C52C /* GradientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD2F95D1B629EBE00C4C52C /* GradientController.swift */; };
+		9FD2F9601B62A19500C4C52C /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FD2F95F1B62A19500C4C52C /* Clock.swift */; };
 		9FF0E3461B5F04A400BD65CD /* AnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF0E3451B5F04A400BD65CD /* AnimationController.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +35,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9FA550601B61A84C00025151 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9FA5505F1B61A84C00025151 /* RealmSwift.framework in Embed Frameworks */,
+				9FA5505D1B61A84C00025151 /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		9F5D89871B618F3B00836311 /* GestureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureController.swift; sourceTree = "<group>"; };
 		9F86A2C41B5EB53800D2A909 /* SwiftTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F86A2C81B5EB53800D2A909 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F86A2C91B5EB53800D2A909 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,8 +63,11 @@
 		9F86A2DE1B5EB53800D2A909 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F86A2DF1B5EB53800D2A909 /* SwiftTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTimerTests.swift; sourceTree = "<group>"; };
 		9F86A2E91B5EB5BB00D2A909 /* TimerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
-		9FD227471B615BAA00AFF405 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		9FD2274A1B615BF800AFF405 /* Data.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Data.xcdatamodel; sourceTree = "<group>"; };
+		9FA5505A1B61A84C00025151 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		9FA5505B1B61A84C00025151 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		9FA550621B61AAA300025151 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9FD2F95D1B629EBE00C4C52C /* GradientController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientController.swift; sourceTree = "<group>"; };
+		9FD2F95F1B62A19500C4C52C /* Clock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		9FF0E3451B5F04A400BD65CD /* AnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,7 +76,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FD227481B615BAA00AFF405 /* CoreData.framework in Frameworks */,
+				9FA5505E1B61A84C00025151 /* RealmSwift.framework in Frameworks */,
+				9FA5505C1B61A84C00025151 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,7 +94,8 @@
 		9F86A2BB1B5EB53800D2A909 = {
 			isa = PBXGroup;
 			children = (
-				9FD227471B615BAA00AFF405 /* CoreData.framework */,
+				9FA5505A1B61A84C00025151 /* Realm.framework */,
+				9FA5505B1B61A84C00025151 /* RealmSwift.framework */,
 				9F86A2C61B5EB53800D2A909 /* SwiftTimer */,
 				9F86A2DC1B5EB53800D2A909 /* SwiftTimerTests */,
 				9F86A2C51B5EB53800D2A909 /* Products */,
@@ -89,13 +116,16 @@
 			children = (
 				9F86A2C91B5EB53800D2A909 /* AppDelegate.swift */,
 				9F86A2CB1B5EB53800D2A909 /* ViewController.swift */,
+				9FD2F95D1B629EBE00C4C52C /* GradientController.swift */,
 				9F86A2E91B5EB5BB00D2A909 /* TimerController.swift */,
+				9FA550621B61AAA300025151 /* User.swift */,
+				9FD2F95F1B62A19500C4C52C /* Clock.swift */,
+				9F5D89871B618F3B00836311 /* GestureController.swift */,
 				9FF0E3451B5F04A400BD65CD /* AnimationController.swift */,
 				9F86A2D01B5EB53800D2A909 /* Images.xcassets */,
 				9F86A2CD1B5EB53800D2A909 /* Main.storyboard */,
 				9F86A2D21B5EB53800D2A909 /* LaunchScreen.xib */,
 				9F86A2C71B5EB53800D2A909 /* Supporting Files */,
-				9FD227491B615BF800AFF405 /* Data.xcdatamodeld */,
 			);
 			path = SwiftTimer;
 			sourceTree = "<group>";
@@ -135,6 +165,8 @@
 				9F86A2C01B5EB53800D2A909 /* Sources */,
 				9F86A2C11B5EB53800D2A909 /* Frameworks */,
 				9F86A2C21B5EB53800D2A909 /* Resources */,
+				9FA550601B61A84C00025151 /* Embed Frameworks */,
+				9FA550611B61AA5A00025151 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -174,6 +206,7 @@
 				TargetAttributes = {
 					9F86A2C31B5EB53800D2A909 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = Y9Y96CV7VP;
 					};
 					9F86A2D81B5EB53800D2A909 = {
 						CreatedOnToolsVersion = 6.4;
@@ -220,14 +253,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9FA550611B61AA5A00025151 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9F86A2C01B5EB53800D2A909 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9FF0E3461B5F04A400BD65CD /* AnimationController.swift in Sources */,
+				9F5D89881B618F3B00836311 /* GestureController.swift in Sources */,
+				9FD2F9601B62A19500C4C52C /* Clock.swift in Sources */,
+				9FA550631B61AAA300025151 /* User.swift in Sources */,
 				9F86A2CC1B5EB53800D2A909 /* ViewController.swift in Sources */,
-				9FD2274B1B615BF800AFF405 /* Data.xcdatamodeld in Sources */,
+				9FD2F95E1B629EBE00C4C52C /* GradientController.swift in Sources */,
 				9F86A2CA1B5EB53800D2A909 /* AppDelegate.swift in Sources */,
 				9F86A2EA1B5EB5BB00D2A909 /* TimerController.swift in Sources */,
 			);
@@ -358,9 +410,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SwiftTimer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -368,9 +427,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					/Users/Kiran/Documents/XDevelop/Xcode,
+					Projects/StayFocusedAppParts/SwiftTimer/RealmSwift.framework,
+				);
 				INFOPLIST_FILE = SwiftTimer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -439,19 +509,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		9FD227491B615BF800AFF405 /* Data.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				9FD2274A1B615BF800AFF405 /* Data.xcdatamodel */,
-			);
-			currentVersion = 9FD2274A1B615BF800AFF405 /* Data.xcdatamodel */;
-			path = Data.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 9F86A2BC1B5EB53800D2A909 /* Project object */;
 }

@@ -7,32 +7,51 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var breakButton: UIButton!
     @IBOutlet weak var modeLabel: UILabel!
-    var mainTimer = TimerController()
-    var lastRecognizedInterval = CGPoint()
-    var kPanIntervalDistance : CGFloat = 30
-    var kPanIntervalSeconds = NSTimeInterval(1)
-    
-    // Core Data Stuff
     @IBOutlet weak var pointsLabel: UILabel!
+    @IBOutlet weak var viewForLayer: UIView!
+    
+    var mainTimer = TimerController()
+    var mainClock = Clock()
+    var mainGestureController = GestureController()
+    var mainGradientController = GradientController()
+    
+    // Realm Properties
+    let realm = Realm()
+    var user = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        mainTimer = TimerController(viewLabel: timerLabel)
         
+        mainTimer = TimerController(viewLabel: timerLabel)
         mainTimer.view = self.view
         mainTimer.breakButton = breakButton
         mainTimer.modeLabel = modeLabel
+        mainTimer.pointsLabel = pointsLabel
+        
+        mainGestureController.view = self.view
+        mainGestureController.mainTimer = mainTimer
         
         breakButton.hidden = true
         breakButton.alpha = 0
+        
+        mainGradientController.view = self.view
+        mainGradientController.layerView = viewForLayer
+        mainGradientController.setupLayer()
+        
+        // Realm setup
+        setupFirstTime()
+        let users = Realm().objects(User)
+        let tempUser = users.first!
+        println("The number is \(tempUser.number)")
+        pointsLabel.text = "\(tempUser.number)"
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,34 +84,56 @@ class ViewController: UIViewController {
     
     // Allows user to swipe the screen to set the timer
     @IBAction func screenSwiped(sender: UIPanGestureRecognizer) {
-        // Checks to make sure the timer is invalid and not yet running
-        if !mainTimer.timer.valid {
-            // Get total distance traveled in current pan
-            var thisInterval = sender.translationInView(self.view)
-            
-            // If the total distance minus the last distance point is greater than the minimum pan distance, pan the timer values
-            if lastRecognizedInterval.y - thisInterval.y > kPanIntervalDistance {
-                // Update the last distance point
-                lastRecognizedInterval = thisInterval;
-                // Update the timer value and display
-                mainTimer.totalTime += kPanIntervalSeconds
-                mainTimer.resetDisplay()
-            } else if -lastRecognizedInterval.y + thisInterval.y > kPanIntervalDistance {
-                // Update the last distance point
-                lastRecognizedInterval = thisInterval;
-                // Update the timer value and display, and set it to zero in case it becomes negative
-                mainTimer.totalTime -= kPanIntervalSeconds
-                if mainTimer.totalTime < 0 {
-                    mainTimer.totalTime = 0
-                }
-                mainTimer.resetDisplay()
-            }
-            // Reset the last distance point back to zero if all fingers lift
-            if sender.state == UIGestureRecognizerState.Ended {
-                lastRecognizedInterval = CGPoint()
+        mainGestureController.controlPan(sender)
+    }
+    
+    
+    
+    
+    
+    // MARK: Realm Functions
+    func userAddPoints(numberOfPoints: Int) {
+        let users = Realm().objects(User)
+        var tempUser = users.first!
+        realm.write {
+            tempUser.number += numberOfPoints
+        }
+        println("Added \(numberOfPoints)")
+    }
+    
+    func userSubtractPoints(numberOfPoints: Int) {
+        let users = Realm().objects(User)
+        var tempUser = users.first!
+        realm.write {
+            tempUser.number -= numberOfPoints
+        }
+        println("Subtracted \(numberOfPoints)")
+    }
+    
+    
+    // MARK: First Load Functions
+    func setupFirstTime() {
+        if isFirstTimeLaunch() {
+            realm.write {
+                self.realm.add(self.user)
+                println("\(self.user) was added")
             }
         }
     }
+
+    func isFirstTimeLaunch()->Bool{
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if let isAppAlreadyLaunchedOnce = defaults.stringForKey("isAppAlreadyLaunchedOnce") {
+            println("App already launched")
+            return false
+        } else {
+            defaults.setBool(true, forKey: "isAppAlreadyLaunchedOnce")
+            println("App launched first time")
+            return true
+        }
+    }
+    
     
     
     
