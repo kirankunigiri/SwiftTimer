@@ -47,6 +47,8 @@ class TimerController: NSObject {
     var stateBreak = 3
     var state = 0
     
+    var breakOver = false
+    
     
     // Constant text strings
     var kWorkText = "Start working!"
@@ -121,6 +123,7 @@ class TimerController: NSObject {
             } else if state == stateSelectBreak {
                 state = stateBreak
             }
+            
             AnimationController.breakButtonDisappear(breakButton)
             println("\(state)")
         }
@@ -240,6 +243,7 @@ class TimerController: NSObject {
             AnimationController.breakButtonDisappear(breakButton)
             breakButton.selected = false
             state = stateSelectCountdown
+            breakOver = true
             modeLabel.text = kWorkText
         }
         

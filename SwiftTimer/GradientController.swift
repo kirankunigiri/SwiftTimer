@@ -76,6 +76,7 @@ class GradientController {
         // Apply the animation
         self.gradientLayer.colors = toArray
         self.gradientLayer.addAnimation(animation, forKey: "colors")
+        
     }
     
     // Changes to a specific gradient for a specific time

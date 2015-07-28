@@ -11,6 +11,7 @@ import RealmSwift
 
 class ViewController: UIViewController {
     
+    // MARK: Properties
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var clockLabel: UILabel!
     @IBOutlet weak var breakButton: UIButton!
@@ -20,6 +21,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
+    // Label Properties
+    var mainImage = UIImageView(image: UIImage(named: "Sun1"))
+    var timerLabel = UILabel()
+    var greetingLabel = UILabel()
+    var clockLabel = UILabel()
+    var levelLabel = UILabel()
+    var modeLabel = UILabel()
+
+    
+    // Object properties
     var mainTimer = TimerController()
     var mainClock = Clock()
     var mainGestureController = GestureController()
@@ -29,6 +40,7 @@ class ViewController: UIViewController {
     let realm = Realm()
     var user = User()
     
+    // MARK: Setup Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -51,7 +63,6 @@ class ViewController: UIViewController {
         mainGradientController.view = self.view
         mainGradientController.layerView = viewForLayer
         mainGradientController.setupLayer()
-        mainGradientController.changeGradient(3, time: 20.0)
         
         // Animations in the beginning
         AnimationController.fadeIn(pointsLabel)
@@ -59,12 +70,90 @@ class ViewController: UIViewController {
         AnimationController.fadeInButton(startButton)
         AnimationController.fadeInButton(stopButton)
         
+        //NSNotifications for event leaving observer
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "appLeave", name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "appEnter", name: UIApplicationDidBecomeActiveNotification, object: nil)
+
         // Realm setup
         setupFirstTime()
-        let users = Realm().objects(User)
-        let tempUser = users.first!
-        println("The number is \(tempUser.number)")
-        pointsLabel.text = "Points: \(tempUser.number)"
+        updatePointsLabel()
+    }
+    
+    // Hide the status bar
+    override func prefersStatusBarHidden() -> Bool {
+        return true;
+    }
+    
+    
+    func setupPosition() {
+        
+        // Background Gradient
+        gradientView.frame = self.view.frame
+        self.view.addSubview(gradientView)
+        mainGradientController.view = self.view
+        mainGradientController.layerView = gradientView
+        mainGradientController.setupLayer()
+        
+        var centerX = self.view.frame.width/2
+        var centerY = self.view.frame.height/2
+        var sunCenter = self.view.frame.height * 0.6
+        
+        // Sun image
+        var imageSize = self.view.frame.width * 0.8
+        var imageFrame = CGRectMake(centerX - imageSize/2, sunCenter - imageSize/2, imageSize, imageSize)
+        self.mainImage.frame = imageFrame
+        mainImage.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(mainImage)
+        
+        // Timer Label
+        var fontSize = 0.22 * imageSize
+        var timerFrame = CGRectMake(centerX, sunCenter, imageSize, imageSize)
+        timerLabel.frame = imageFrame
+        timerLabel.text = "24:36"
+        timerLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: fontSize)
+        timerLabel.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(timerLabel)
+        
+        // Greeting label
+        fontSize = 0.09 * self.view.frame.width
+        var sunGap = CGFloat(20)
+        var greetingFrame = CGRectMake(0, sunCenter - imageSize/2 - sunGap,  self.view.frame.width, fontSize * 1.2)
+        greetingLabel.frame = greetingFrame
+        greetingLabel.text = "Good Morning"
+        greetingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: fontSize)
+        greetingLabel.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(greetingLabel)
+        
+        // Clock Label
+        fontSize = 0.08 * self.view.frame.width
+        var clockFrame = CGRectMake(0, greetingFrame.origin.y - greetingFrame.height * 0.6,  self.view.frame.width, fontSize)
+        clockLabel.frame = clockFrame
+        clockLabel.text = "9:37 AM"
+        clockLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: fontSize)
+        clockLabel.textAlignment = NSTextAlignment.Center
+        self.view.addSubview(clockLabel)
+        
+        // Level Label
+        fontSize = 0.06 * self.view.frame.width
+        var marginX = CGFloat(10)
+        var marginY = CGFloat(10)
+        var levelFrame = CGRectMake(0, marginY,  self.view.frame.width - marginX, fontSize * 1.2)
+        levelLabel.frame = levelFrame
+        levelLabel.text = "Level 22: Task Master"
+        levelLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: fontSize)
+        levelLabel.textAlignment = NSTextAlignment.Right
+        self.view.addSubview(levelLabel)
+        
+        // Mode Label
+        fontSize = 0.06 * self.view.frame.width
+        marginX = CGFloat(10)
+        marginY = CGFloat(10)
+        var modeFrame = CGRectMake(0, marginY + levelFrame.height,  self.view.frame.width - marginX, fontSize * 1.2)
+        modeLabel.frame = modeFrame
+        modeLabel.text = "Work Mode"
+        modeLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: fontSize)
+        modeLabel.textAlignment = NSTextAlignment.Right
+        self.view.addSubview(modeLabel)
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,6 +161,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // MARK: Outlet/Gesture Functions
     @IBAction func start(sender: UIButton) {
         mainTimer.start()
     }
@@ -102,8 +193,6 @@ class ViewController: UIViewController {
     
     
     
-    
-    
     // MARK: Realm Functions
     func userAddPoints(numberOfPoints: Int) {
         let users = Realm().objects(User)
@@ -125,10 +214,10 @@ class ViewController: UIViewController {
     }
     
     func updatePointsLabel() {
-//        let users = Realm().objects(User)
-//        let tempUser = users.first!
-//        println("The number is \(tempUser.number)")
-//        pointsLabel.text = "Points: \(tempUser.number)"
+        let users = Realm().objects(User)
+        let tempUser = users.first!
+        println("The number is \(tempUser.number)")
+        pointsLabel.text = "Points: \(tempUser.number)"
     }
     
     
@@ -142,7 +231,7 @@ class ViewController: UIViewController {
         }
     }
 
-    func isFirstTimeLaunch()->Bool{
+    func isFirstTimeLaunch() -> Bool{
         let defaults = NSUserDefaults.standardUserDefaults()
         
         if let isAppAlreadyLaunchedOnce = defaults.stringForKey("isAppAlreadyLaunchedOnce") {
@@ -156,6 +245,34 @@ class ViewController: UIViewController {
     }
     
     
+    
+    
+    // MARK: App leave/enter functions
+    
+    // Runs when the user leaves the app to background
+    func appLeave() {
+        // If the user is supposed to be working, penalize them and update UI
+        if mainTimer.state == mainTimer.stateCountdown {
+            userSubtractPoints(10)
+            updatePointsLabel()
+            println("Background mode with penalty")
+        }
+        
+        println("Current state after leaving is \(mainTimer.state)")
+    }
+    
+    // Runs whenever the app is opened from background
+    func appEnter() {
+        breakTooLong()
+    }
+    
+    // Code runs when break is too long
+    func breakTooLong() {
+        if mainTimer.breakOver {
+            println("You had a too long break!")
+            mainTimer.breakOver = false
+        }
+    }
     
     
     
