@@ -11,7 +11,7 @@ import UIKit
 import RealmSwift
 
 class User: Object {
-    dynamic var number = 0
+    dynamic var number: Int = 0
     dynamic var level = 1
     dynamic var name = ""
 }

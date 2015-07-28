@@ -24,10 +24,7 @@ class Clock : NSObject {
     // Starts the clock by making it visible starting the timer to update it
     func start() {
         updateTimer()
-        timeLabel.alpha = 0.0
-        UIView.animateWithDuration(3.0, animations: {
-            self.timeLabel.alpha = 1.0
-        })
+        AnimationController.fadeIn(timeLabel)
         var updateTime = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimer", userInfo: nil, repeats: true)
     }
     
@@ -35,5 +32,15 @@ class Clock : NSObject {
     func updateTimer() {
         var timeString = getTimeString()
         self.timeLabel.text = timeString
+    }
+    
+    // Private Time Functions
+    class func getCurrentHour() -> Int {
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date)
+        let hour = components.hour
+        
+        return hour
     }
 }

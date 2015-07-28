@@ -12,10 +12,13 @@ import RealmSwift
 class ViewController: UIViewController {
     
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var clockLabel: UILabel!
     @IBOutlet weak var breakButton: UIButton!
     @IBOutlet weak var modeLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var viewForLayer: UIView!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
     
     var mainTimer = TimerController()
     var mainClock = Clock()
@@ -36,6 +39,9 @@ class ViewController: UIViewController {
         mainTimer.modeLabel = modeLabel
         mainTimer.pointsLabel = pointsLabel
         
+        mainClock.timeLabel = clockLabel
+        mainClock.start()
+        
         mainGestureController.view = self.view
         mainGestureController.mainTimer = mainTimer
         
@@ -45,13 +51,20 @@ class ViewController: UIViewController {
         mainGradientController.view = self.view
         mainGradientController.layerView = viewForLayer
         mainGradientController.setupLayer()
+        mainGradientController.changeGradient(3, time: 20.0)
+        
+        // Animations in the beginning
+        AnimationController.fadeIn(pointsLabel)
+        AnimationController.fadeIn(modeLabel)
+        AnimationController.fadeInButton(startButton)
+        AnimationController.fadeInButton(stopButton)
         
         // Realm setup
         setupFirstTime()
         let users = Realm().objects(User)
         let tempUser = users.first!
         println("The number is \(tempUser.number)")
-        pointsLabel.text = "\(tempUser.number)"
+        pointsLabel.text = "Points: \(tempUser.number)"
     }
     
     override func didReceiveMemoryWarning() {
@@ -106,8 +119,16 @@ class ViewController: UIViewController {
         var tempUser = users.first!
         realm.write {
             tempUser.number -= numberOfPoints
+            println(tempUser.number)
         }
         println("Subtracted \(numberOfPoints)")
+    }
+    
+    func updatePointsLabel() {
+//        let users = Realm().objects(User)
+//        let tempUser = users.first!
+//        println("The number is \(tempUser.number)")
+//        pointsLabel.text = "Points: \(tempUser.number)"
     }
     
     

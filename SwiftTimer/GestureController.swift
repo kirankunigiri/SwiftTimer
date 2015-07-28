@@ -18,7 +18,7 @@ class GestureController: NSObject {
     // Constants
     var lastRecognizedInterval = CGPoint()
     var kPanIntervalDistance : CGFloat = 30
-    var kPanIntervalSeconds = NSTimeInterval(1)
+    var kPanIntervalSeconds = NSTimeInterval(300)
     
     func controlPan(sender: UIPanGestureRecognizer) {
         // Checks to make sure the timer is invalid and not yet running

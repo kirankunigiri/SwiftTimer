@@ -15,7 +15,7 @@ class AnimationController: NSObject {
     var timerLabel = UILabel()
     var breakButton = UIButton()
     
-    // Mkes the break button disappear
+    // Makes the break button disappear
     class func breakButtonDisappear(breakButton: UIButton) {
         UIView.animateWithDuration(0.4, animations: {
             breakButton.alpha = 0
@@ -30,6 +30,21 @@ class AnimationController: NSObject {
         UIView.animateWithDuration(0.4, animations: {
             breakButton.hidden = false
             breakButton.alpha = 1
+        })
+    }
+    
+    // Makes a label fade in at start
+    class func fadeIn(label: UILabel) {
+        label.alpha = 0.0
+        UIView.animateWithDuration(3.0, animations: {
+            label.alpha = 1.0
+        })
+    }
+    
+    class func fadeInButton(button: UIButton) {
+        button.alpha = 0.0
+        UIView.animateWithDuration(3.0, animations: {
+            button.alpha = 1.0
         })
     }
 }

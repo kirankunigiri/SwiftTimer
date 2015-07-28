@@ -51,9 +51,11 @@ class TimerController: NSObject {
     // Constant text strings
     var kWorkText = "Start working!"
     var kBreakText = "Want to take a break?"
+    var kModeWorkText = "Work Mode"
+    var kModeBreakText = "Break Mode"
     
     override init() {
-        
+        super.init()
     }
     
     // To create a timer with the label to update
@@ -64,6 +66,10 @@ class TimerController: NSObject {
         label = viewLabel
         updateLabel()
         label.text = "Start"
+        modeLabel.text = kWorkText
+        
+        label.alpha = 0.0
+        AnimationController.fadeIn(label)
         
         state = stateSelectCountdown
     }
@@ -116,6 +122,7 @@ class TimerController: NSObject {
                 state = stateBreak
             }
             AnimationController.breakButtonDisappear(breakButton)
+            println("\(state)")
         }
     }
     
@@ -128,6 +135,11 @@ class TimerController: NSObject {
             resetTimer()
             // Update the state to work select state
             label.text = kWorkText
+            if state == stateBreak {
+                state = stateSelectCountdown
+                modeLabel.text = kModeWorkText
+
+            }
         }
     }
     
@@ -222,23 +234,35 @@ class TimerController: NSObject {
     // Later it will be used to add points and update the UI
     private func timerFinished() {
         if state == stateCountdown {
+            userAddPoints(Int(totalTime))
             AnimationController.breakButtonAppear(breakButton)
         } else if state == stateBreak {
             AnimationController.breakButtonDisappear(breakButton)
             breakButton.selected = false
             state = stateSelectCountdown
-            modeLabel.text = "Work Mode"
+            modeLabel.text = kWorkText
         }
-        
-        let users = Realm().objects(User)
-        var tempUser = users.first!
-        
-        realm.write {
-            tempUser.number += Int(self.totalTime)
-        }
-        pointsLabel.text = "\(tempUser.number)"
         
         self.stop()
+    }
+    
+    // MARK: Realm Functions
+    func userAddPoints(numberOfPoints: Int) {
+        let users = Realm().objects(User)
+        var tempUser = users.first!
+        realm.write {
+            tempUser.number += numberOfPoints
+        }
+        pointsLabel.text = "Points: \(tempUser.number)"
+    }
+    
+    func userSubtractPoints(numberOfPoints: Int) {
+        let users = Realm().objects(User)
+        var tempUser = users.first!
+        realm.write {
+            tempUser.number -= numberOfPoints
+        }
+        pointsLabel.text = "Points: \(tempUser.number)"
     }
     
 }

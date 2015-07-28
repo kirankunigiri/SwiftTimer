@@ -64,7 +64,7 @@
                                     <action selector="breakButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Y9-5P-5RH"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="c54-p1-Kff">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Work Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="c54-p1-Kff">
                                 <rect key="frame" x="237" y="145" width="125" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4NR-kw-s0N"/>
@@ -85,7 +85,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hye-65-xQh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Clock" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hye-65-xQh">
                                 <rect key="frame" x="237" y="35" width="125" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="9mA-rR-iym"/>
@@ -216,8 +216,11 @@
                     </view>
                     <connections>
                         <outlet property="breakButton" destination="gj3-RQ-nbC" id="2MG-v3-is0"/>
+                        <outlet property="clockLabel" destination="hye-65-xQh" id="227-E7-0eF"/>
                         <outlet property="modeLabel" destination="c54-p1-Kff" id="WGF-xu-Mq8"/>
                         <outlet property="pointsLabel" destination="S6l-TW-X4u" id="qtL-nk-K3D"/>
+                        <outlet property="startButton" destination="fwy-3z-Bow" id="VuU-wQ-dUR"/>
+                        <outlet property="stopButton" destination="DpU-I5-EJd" id="3pF-f7-3Qk"/>
                         <outlet property="timerLabel" destination="UNH-Ks-FCZ" id="1PL-IR-Wx3"/>
                         <outlet property="viewForLayer" destination="JXa-AZ-yPt" id="GZC-b7-sNL"/>
                     </connections>

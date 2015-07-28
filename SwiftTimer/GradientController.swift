@@ -27,9 +27,36 @@ class GradientController {
     func setupLayer() {
         setupColorArray()
         setupGradientArray()
-        gradientLayer = gradientArray[0]
+        
+        var hour = Clock.getCurrentHour()
+        
+        // Set gradient based on the current time
+        switch true {
+        case hour >= 4 && hour < 9:
+            currentGradientIndex = 0
+            currentGradient = gradientArray[currentGradientIndex]
+            gradientLayer = currentGradient
+        case hour >= 9 && hour < 15:
+            currentGradientIndex = 1
+            currentGradient = gradientArray[currentGradientIndex]
+            gradientLayer = currentGradient
+        case hour >= 15 && hour < 19:
+            currentGradientIndex = 2
+            currentGradient = gradientArray[currentGradientIndex]
+            gradientLayer = currentGradient
+        case hour >= 19 && hour < 22:
+            currentGradientIndex = 3
+            currentGradient = gradientArray[currentGradientIndex]
+            gradientLayer = currentGradient
+        case hour >= 22 && hour < 4:
+            currentGradientIndex = 4
+            currentGradient = gradientArray[currentGradientIndex]
+            gradientLayer = currentGradient
+        default:
+            println("error")
+        }
+        
         self.layerView.layer.addSublayer(gradientLayer)
-        currentGradient = gradientArray[0]
     }
     
     // Changes to the next gradient
@@ -72,6 +99,16 @@ class GradientController {
         // Apply the animation
         self.gradientLayer.colors = toArray
         self.gradientLayer.addAnimation(animation, forKey: "colors")
+    }
+    
+    // Changes to a custom gradient for a specific time
+    func changeCustomGradient(newGradient: CAGradientLayer) {
+        
+        // Update current gradient
+        currentGradient = newGradient
+        
+        // Apply the animation
+        self.gradientLayer = newGradient
     }
     
     // MARK: Color creation/organization functions
