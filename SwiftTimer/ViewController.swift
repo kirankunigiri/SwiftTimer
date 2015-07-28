@@ -12,16 +12,12 @@ import RealmSwift
 class ViewController: UIViewController {
     
     // MARK: Properties
-    @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var clockLabel: UILabel!
     @IBOutlet weak var breakButton: UIButton!
-    @IBOutlet weak var modeLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var viewForLayer: UIView!
-    @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var stopButton: UIButton!
     
     // Label Properties
+    var startButton = UIButton()
     var mainImage = UIImageView(image: UIImage(named: "Sun1"))
     var timerLabel = UILabel()
     var greetingLabel = UILabel()
@@ -29,7 +25,6 @@ class ViewController: UIViewController {
     var levelLabel = UILabel()
     var modeLabel = UILabel()
 
-    
     // Object properties
     var mainTimer = TimerController()
     var mainClock = Clock()
@@ -68,7 +63,6 @@ class ViewController: UIViewController {
         AnimationController.fadeIn(pointsLabel)
         AnimationController.fadeIn(modeLabel)
         AnimationController.fadeInButton(startButton)
-        AnimationController.fadeInButton(stopButton)
         
         //NSNotifications for event leaving observer
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "appLeave", name: UIApplicationDidEnterBackgroundNotification, object: nil)
@@ -77,6 +71,8 @@ class ViewController: UIViewController {
         // Realm setup
         setupFirstTime()
         updatePointsLabel()
+        
+        setupPosition()
     }
     
     // Hide the status bar
@@ -88,22 +84,21 @@ class ViewController: UIViewController {
     func setupPosition() {
         
         // Background Gradient
-        gradientView.frame = self.view.frame
-        self.view.addSubview(gradientView)
-        mainGradientController.view = self.view
-        mainGradientController.layerView = gradientView
-        mainGradientController.setupLayer()
         
         var centerX = self.view.frame.width/2
         var centerY = self.view.frame.height/2
         var sunCenter = self.view.frame.height * 0.6
         
         // Sun image
+        startButton.setImage(UIImage(named: "Sun1"), forState: UIControlState.Normal)
+        startButton.addTarget(self, action: "start", forControlEvents: UIControlEvents.TouchUpInside)
+        startButton.adjustsImageWhenHighlighted = false
+
         var imageSize = self.view.frame.width * 0.8
         var imageFrame = CGRectMake(centerX - imageSize/2, sunCenter - imageSize/2, imageSize, imageSize)
-        self.mainImage.frame = imageFrame
-        mainImage.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(mainImage)
+        self.startButton.frame = imageFrame
+        startButton.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(startButton)
         
         // Timer Label
         var fontSize = 0.22 * imageSize
@@ -112,6 +107,7 @@ class ViewController: UIViewController {
         timerLabel.text = "24:36"
         timerLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: fontSize)
         timerLabel.textAlignment = NSTextAlignment.Center
+        timerLabel.adjustsFontSizeToFitWidth = true
         self.view.addSubview(timerLabel)
         
         // Greeting label
@@ -163,12 +159,8 @@ class ViewController: UIViewController {
     
     
     // MARK: Outlet/Gesture Functions
-    @IBAction func start(sender: UIButton) {
+    func start() {
         mainTimer.start()
-    }
-    
-    @IBAction func stop(sender: UIButton) {
-        mainTimer.stop()
     }
     
     @IBAction func breakButtonPressed(sender: UIButton) {
